@@ -31,8 +31,7 @@ class ListaController: UIViewController, UISearchResultsUpdating, UITableViewDat
         //lo que aparece en la barra de búsqueda antes de teclear nada
         self.searchController.searchBar.placeholder = "Buscar texto"
         //Añadimos la barra de búsqueda a la tabla
-        self.searchController.searchBar.sizeToFit()
-        self.tabla.tableHeaderView = searchController.searchBar
+        self.navigationItem.searchController = searchController
         
         self.tabla.dataSource = self
     }
@@ -97,5 +96,11 @@ class ListaController: UIViewController, UISearchResultsUpdating, UITableViewDat
         nuevaCelda.textLabel?.text = datos[indexPath.row].name
         return nuevaCelda
      }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // let vc = segue.destination as? DetalleViewController
+        // let name = datos[tabla.indexPathForSelectedRow?.row ?? <#default value#>].name
+        // vc?.name.text = name
+    }
     
 }

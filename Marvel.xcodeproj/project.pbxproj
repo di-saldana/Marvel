@@ -16,6 +16,7 @@
 		7FEF229D91B5A060B4475976 /* Pods_Marvel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 025D6C6E1625BD14A92D26EC /* Pods_Marvel.framework */; };
 		C73DF1A22AF554BC00FC7F86 /* ListaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73DF1A12AF554BC00FC7F86 /* ListaController.swift */; };
 		C73DF1A42AF5584300FC7F86 /* Throttler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73DF1A32AF5584300FC7F86 /* Throttler.swift */; };
+		C783AED02AF5706000E34D1D /* DetalleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C783AECF2AF5706000E34D1D /* DetalleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		2DA4F53ECB744000C58FD485 /* Pods-Marvel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Marvel.debug.xcconfig"; path = "Target Support Files/Pods-Marvel/Pods-Marvel.debug.xcconfig"; sourceTree = "<group>"; };
 		C73DF1A12AF554BC00FC7F86 /* ListaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListaController.swift; sourceTree = "<group>"; };
 		C73DF1A32AF5584300FC7F86 /* Throttler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Throttler.swift; sourceTree = "<group>"; };
+		C783AECF2AF5706000E34D1D /* DetalleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				2715059E2910367F00CA95B0 /* LaunchScreen.storyboard */,
 				271505A12910367F00CA95B0 /* Info.plist */,
 				C73DF1A12AF554BC00FC7F86 /* ListaController.swift */,
+				C783AECF2AF5706000E34D1D /* DetalleViewController.swift */,
 			);
 			path = Marvel;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C783AED02AF5706000E34D1D /* DetalleViewController.swift in Sources */,
 				271505982910367B00CA95B0 /* ViewController.swift in Sources */,
 				C73DF1A42AF5584300FC7F86 /* Throttler.swift in Sources */,
 				C73DF1A22AF554BC00FC7F86 /* ListaController.swift in Sources */,
