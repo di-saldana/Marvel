@@ -16,6 +16,8 @@ class ListaController: UIViewController, UISearchResultsUpdating, UITableViewDat
     let throttler = Throttler(minimumDelay: 0.1)  //el delay está en segundos
     
     var datos: [RCCharacterObject] = []
+    
+    var miSpinner = UIActivityIndicatorView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +36,16 @@ class ListaController: UIViewController, UISearchResultsUpdating, UITableViewDat
         self.navigationItem.searchController = searchController
         
         self.tabla.dataSource = self
+        
+        //que se oculte automáticamente al pararse
+        miSpinner.hidesWhenStopped = true
+        //lo añadimos a la vista principal del controller actual
+        self.view.addSubview(miSpinner)
+        //lo centramos en la pantalla
+        miSpinner.center.x = self.view.center.x
+        miSpinner.center.y = self.view.center.y
+        //nos aseguramos que está al frente y no tapado por la tabla
+        self.view.bringSubviewToFront(self.miSpinner)
     }
     
 
@@ -56,11 +68,16 @@ class ListaController: UIViewController, UISearchResultsUpdating, UITableViewDat
             if textoBuscado.count > 2 {
                 self.mostrarPersonajes(comienzanPor: textoBuscado)
             }
+        
         }
     }
     
     func mostrarPersonajes(comienzanPor cadena : String) {
         self.datos = []
+        
+        OperationQueue.main.addOperation() {
+            self.miSpinner.startAnimating()
+        }
         
         let marvelAPI = RCMarvelAPI()
         //PUEDES CAMBIAR ESTO PARA PONER TUS CLAVES
@@ -78,6 +95,7 @@ class ListaController: UIViewController, UISearchResultsUpdating, UITableViewDat
                     
                     OperationQueue.main.addOperation() {
                         self.tabla.reloadData();
+                        self.miSpinner.stopAnimating()
                     }
                 }
                 print("Hay \(personajes.count) personajes")
