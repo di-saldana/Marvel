@@ -49,8 +49,6 @@ class ListaController: UIViewController, UISearchResultsUpdating, UITableViewDat
     
     func updateSearchResults(for searchController: UISearchController) {
         throttler.throttle {
-            self.datos = [] // Reinicializacion de datos por cada nueva busqueda
-            
             let textoBuscado = searchController.searchBar.text!
             let textoBuscadoTrim = textoBuscado.trimmingCharacters(in: .whitespacesAndNewlines)
             print(textoBuscadoTrim)
@@ -62,6 +60,8 @@ class ListaController: UIViewController, UISearchResultsUpdating, UITableViewDat
     }
     
     func mostrarPersonajes(comienzanPor cadena : String) {
+        self.datos = []
+        
         let marvelAPI = RCMarvelAPI()
         //PUEDES CAMBIAR ESTO PARA PONER TUS CLAVES
         marvelAPI.publicKey = "a6927e7e15930110aade56ef90244f6d"
@@ -89,18 +89,44 @@ class ListaController: UIViewController, UISearchResultsUpdating, UITableViewDat
         return datos.count
     }
     
-    func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let nuevaCelda = tableView.dequeueReusableCell(withIdentifier: "celda",
-                              for: indexPath)
-        nuevaCelda.textLabel?.text = datos[indexPath.row].name
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let nuevaCelda = tableView.dequeueReusableCell(withIdentifier: "celda",
+//                                                       for: indexPath)
+//        nuevaCelda.textLabel?.text = datos[indexPath.row].name
+//        return nuevaCelda
+//     }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let nuevaCelda = tableView.dequeueReusableCell(withIdentifier: "celda", for: indexPath)
+
+        // Check if the indexPath.row is within the valid range of datos
+        if indexPath.row < datos.count {
+            nuevaCelda.textLabel?.text = datos[indexPath.row].name
+        } else {
+            // Handle the case where indexPath.row is out of bounds
+            nuevaCelda.textLabel?.text = "No data available"
+        }
+
         return nuevaCelda
-     }
+    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // let vc = segue.destination as? DetalleViewController
-        // let name = datos[tabla.indexPathForSelectedRow?.row ?? <#default value#>].name
-        // vc?.name.text = name
+        if segue.identifier == "miSegue" {
+            if let destinationVC = segue.destination as? DetalleViewController,
+               let selectedIndexPath = tabla.indexPathForSelectedRow {
+                
+                // Check if the selected index is within the bounds of the datos array
+                if selectedIndexPath.row < datos.count {
+                    let selectedCharacter = datos[selectedIndexPath.row]
+                    destinationVC.character = selectedCharacter
+                } else {
+                    // Handle the case where the index is out of bounds (e.g., show an error message)
+                    print("Selected index is out of bounds")
+                }
+            }
+        }
     }
-    
+
+
+
 }
